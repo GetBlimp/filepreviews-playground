@@ -8,8 +8,9 @@ $(function() {
   var jobId = null;
   var $fileInput = $('#url');
   var $jobInput = $('#jobId');
-  var $submitButton = $('#generate');
-  var $checkButton = $("#status");
+  var $generateForm = $('#generate');
+  var $retrieveForm = $('#retrieve');
+  var $resetButton = $('#reset');
   var $logContainer = $('#logContainer');
 
   function log(message) {
@@ -17,7 +18,8 @@ $(function() {
       new Date() + '<br><strong>' + message + '</strong><br><hr><br>');
   }
 
-  function save(key, value) {
+
+  function set(key, value) {
     window.localStorage.setItem(key, value);
   }
 
@@ -25,26 +27,41 @@ $(function() {
     return window.localStorage.getItem(key);
   }
 
+
   if (get('url')) {
     $fileInput.val(get('url'));
+    log('Got "url" "' + get('url') + '" from localStorage');
   }
 
   if (get('jobId')) {
     $jobInput.val(get('jobId'));
+    log('Got "jobId" "' + get('jobId') + '" from localStorage');
   }
 
-  $submitButton.click(function(event) {
+
+  $resetButton.click(function(event) {
     event.preventDefault();
 
-    save('url', $fileInput.val());
+    set('url', '');
+    set('jobId', '');
+
+    $fileInput.val('');
+    $jobInput.val('');
+    $logContainer.html('');
+  });
+
+  $generateForm.submit(function(event) {
+    event.preventDefault();
+
+    set('url', $fileInput.val());
 
     preview.generate($fileInput.val(), function(err, result) {
       if (err) {
-        log('Error: ' + err);
+        log('Error: ' + JSON.stringify(err, null, 2));
 
       } else {
         $jobInput.val(result.id);
-        save('jobId', result.id);
+        set('jobId', result.id);
         log('jobId: ' + result.id);
         log('Status: ' + result.status);
       }
@@ -52,19 +69,20 @@ $(function() {
     });
   });
 
-  $checkButton.click(function(event) {
+  $retrieveForm.submit(function(event) {
     event.preventDefault();
 
-    if (!get('jobId')) {
-      log('ERROR: First submit a preview then retrieve results');
+    if (!$jobInput.val()) {
+      log('Error: Plase specify a jobId');
 
     } else {
-      preview.retrieve(get('jobId'), function(err, result) {
+      preview.retrieve($jobInput.val(), function(err, result) {
         if (err) {
-          log('Error: ' + err);
-        }
+          log('Error: ' + JSON.stringify(err, null, 2));
 
-        log('Result: ' + JSON.stringify(result, null, 2));
+        } else {
+          log('Result: ' + JSON.stringify(result, null, 2));
+        }
       });
     }
   });

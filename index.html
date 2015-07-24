@@ -11,22 +11,23 @@
 </head>
 <body>
   <h1>FilePreviews.io Playground</h1>
+  <button id="reset">Reset</button>
 
   <hr>
 
-  <form>
+  <form id="generate">
     <h2>Submit Job</h2>
     <label for="url">File URL:</label>
-    <p><input type="text" id="url"></p>
+    <p><input type="text" id="url" required /></p>
     <p><button id="generate">Submit Job</button></p>
   </form>
 
   <hr>
 
-  <form>
+  <form id="retrieve">
     <h2>Check status</h2>
     <label for="jobId">JobId:</label>
-    <p><input type="text" id="jobId" value=""></p>
+    <p><input type="text" id="jobId" required /></p>
     <p><button id="status">Check Status</button></p>
   </form>
 
