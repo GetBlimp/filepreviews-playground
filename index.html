@@ -17,7 +17,9 @@
 
   <form id="generate">
     <h2>Submit Job</h2>
-    <label for="url">File URL:</label>
+    <p><label for="uploader">Upload a file:</label></p>
+    <p><input type="filepicker" data-fp-apikey="A2akJQayfTJGyk1QPUbrQz" id="uploader"></p>
+    <p><label for="url">or enter a file URL:</label></p>
     <p><input type="text" id="url" required /></p>
     <p><button id="generate">Submit Job</button></p>
   </form>
@@ -26,7 +28,7 @@
 
   <form id="retrieve">
     <h2>Check status</h2>
-    <label for="jobId">JobId:</label>
+    <p><label for="jobId">JobId:</label></p>
     <p><input type="text" id="jobId" required /></p>
     <p><button id="status">Check Status</button></p>
   </form>
@@ -35,6 +37,7 @@
 
   <pre id="logContainer"></pre>
 
+  <script src="//api.filepicker.io/v2/filepicker.js"></script>
   <script src="bower_components/filepreviews/dist/filepreviews.js"></script>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="app.js"></script>

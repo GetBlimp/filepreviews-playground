@@ -5,13 +5,15 @@ var preview = new FilePreviews({
 });
 
 $(function() {
-  var jobId = null;
   var $fileInput = $('#url');
   var $jobInput = $('#jobId');
+
   var $generateForm = $('#generate');
   var $retrieveForm = $('#retrieve');
   var $resetButton = $('#reset');
+
   var $logContainer = $('#logContainer');
+  var $uploader = $('#uploader');
 
   function log(message) {
     $logContainer.prepend(
@@ -84,6 +86,15 @@ $(function() {
           log('Result: ' + JSON.stringify(result, null, 2));
         }
       });
+    }
+  });
+
+  $uploader.change(function(event) {
+    var filURL = event.originalEvent.fpfile.url;
+
+    if (filURL) {
+      $fileInput.val(filURL);
+      $generateForm.submit();
     }
   });
 
