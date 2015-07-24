@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FilePreviews.io Playground</title>
+  <link rel="stylesheet" href="bower_components/normalize.css/normalize.css">
+  <style>
+    body { margin: 50px; }
+    input { padding: 10px; width: 400px; }
+    pre { background-color: #E5E5E5; padding: 20px; }
+  </style>
+</head>
+<body>
+  <h1>FilePreviews.io Playground</h1>
+
+  <hr>
+
+  <form>
+    <h2>Submit Job</h2>
+    <label for="url">File URL:</label>
+    <p><input type="text" id="url"></p>
+    <p><button id="generate">Submit Job</button></p>
+  </form>
+
+  <hr>
+
+  <form>
+    <h2>Check status</h2>
+    <label for="jobId">JobId:</label>
+    <p><input type="text" id="jobId" value=""></p>
+    <p><button id="status">Check Status</button></p>
+  </form>
+
+  <hr>
+
+  <pre id="logContainer"></pre>
+
+  <script src="bower_components/filepreviews/dist/filepreviews.js"></script>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
