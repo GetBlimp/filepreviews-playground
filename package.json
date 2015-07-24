@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cp index.html parse/public && cp app.js parse/public && cp -r bower_components parse/public",
+    "clean": "rm -rf parse/public && mkdir -p parse/public",
+    "build": "npm run clean && cp index.html parse/public && cp app.js parse/public && cp -r bower_components parse/public",
     "deploy": "npm run build && cd parse/ && parse deploy"
   },
   "repository": {
