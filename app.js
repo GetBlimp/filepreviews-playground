@@ -14,6 +14,14 @@ $(function() {
 
   var $logContainer = $('#logContainer');
   var $uploader = $('#uploader');
+  
+  var previewOptions = {
+    uploader: {
+      headers: {
+        'x-amz-acl': 'public-read'
+      }
+    }
+  };
 
   function log(message) {
     $logContainer.prepend(
@@ -57,7 +65,7 @@ $(function() {
 
     set('url', $fileInput.val());
 
-    preview.generate($fileInput.val(), function(err, result) {
+    preview.generate($fileInput.val(), previewOptions, function(err, result) {
       if (err) {
         log('Error: ' + JSON.stringify(err, null, 2));
 
